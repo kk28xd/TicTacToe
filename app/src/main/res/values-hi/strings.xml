@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TicTacToe</string>
+    <string name="enter_player_names">खिलाड़ियों के नाम दर्ज करें</string>
+    <string name="player_one">खिलाड़ी एक</string>
+    <string name="player_two">खिलाड़ी दो</string>
+    <string name="start_game">खेल शुरू करें</string>
+    <string name="empty_field">खाली है!</string>
+    <string name="winner">विजेता है!</string>
+    <string name="draw">ड्रा</string>
+    <string name="start_again">फिर से शुरू करें</string>
+    <string name="exit">बाहर निकलें</string>
+    <string name="language">भाषा</string>
+    <string name="select_language">भाषा चुनें</string>
+    <string name="music">संगीत</string>
+    <string name="music_off">संगीत बंद</string>
+    <string name="music_on">संगीत चालू</string>
+    <string name="click_sound">क्लिक ध्वनि</string>
+    <string name="sound_off">ध्वनि बंद</string>
+    <string name="sound_on">ध्वनि चालू</string>
+    <string name="play_vs_robot">रोबोट के खिलाफ खेलें</string>
+    <string name="play_with_a_friend">एक दोस्त के साथ खेलें</string>
+    <string name="robot">रोबोट</string>
+    <string name="player">खिलाड़ी</string>
+</resources>

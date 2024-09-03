@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">TicTacToe</string>
+    <string name="enter_player_names" translatable="false">Enter Player names</string>
+    <string name="player_one" translatable="false">Player One</string>
+    <string name="player_two" translatable="false">Player Two</string>
+    <string name="start_game" translatable="false">START GAME</string>
+    <string name="empty_field" translatable="false">empty field!</string>
+    <string name="winner" translatable="false">is the Winner!</string>
+    <string name="draw" translatable="false">Match Draw</string>
+    <string name="start_again" translatable="false">Start Again</string>
+    <string name="exit" translatable="false">Exit</string>
+    <string name="language" translatable="false">language</string>
+    <string name="select_language" translatable="false">Select Language</string>
+    <string name="music" translatable="false">music</string>
+    <string name="music_off">Music Off</string>
+    <string name="music_on">Music On</string>
+    <string name="click_sound">click sound</string>
+    <string name="sound_off">Sound Off</string>
+    <string name="sound_on">Sound On</string>
+    <string name="play_vs_robot">Play vs robot</string>
+    <string name="play_with_a_friend">Play with a friend</string>
+    <string name="robot">Robot</string>
+    <string name="player">Player</string>
+
+    <string-array name="language_options">
+        <item>English</item>
+        <item>Arabic</item>
+        <item>German</item>
+        <!-- Add more languages here -->
+    </string-array>
+
+</resources>
