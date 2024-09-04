@@ -22,4 +22,8 @@
     <string name="play_with_a_friend">एक दोस्त के साथ खेलें</string>
     <string name="robot">रोबोट</string>
     <string name="player">खिलाड़ी</string>
+    <string name="easy">आसान</string>
+    <string name="medium">मध्यम</string>
+    <string name="hard">कठिन</string>
+    <string name="play_with_robot">रोबोट के साथ खेलें</string>
 </resources>

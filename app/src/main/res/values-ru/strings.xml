@@ -22,4 +22,8 @@
     <string name="play_with_a_friend">Играть с другом</string>
     <string name="robot">робот</string>
     <string name="player">игрок</string>
+    <string name="easy">Легкий</string>
+    <string name="medium">Средний</string>
+    <string name="hard">Трудный</string>
+    <string name="play_with_robot">Играть с роботом</string>
 </resources>

@@ -15,6 +15,7 @@ import android.os.Handler;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,8 @@ public class Playing_VS_Robot extends AppCompatActivity {
 
     private SoundPool soundPool;
     private int clickSoundId;
+    Intent intent;
+    int level;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,9 @@ public class Playing_VS_Robot extends AppCompatActivity {
         image7 = findViewById(R.id.bottomLeftBox);
         image8 = findViewById(R.id.bottomCenterBox);
         image9 = findViewById(R.id.bottomRightBox);
+
+        intent = getIntent();
+        level = intent.getIntExtra("level", 0);
 
         SharedPreferences sharedPreferencesClick = getSharedPreferences("ClickPrefs", MODE_PRIVATE);
 
@@ -223,7 +229,9 @@ public class Playing_VS_Robot extends AppCompatActivity {
             playerTurn = 2;
             isPlayerTurnFirst = true;
             changePlayerTurn(2);
-            computerPlay();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                new Handler().postDelayed(this::computerPlay, this, 400);
+            }
         }
     }
 
@@ -233,57 +241,11 @@ public class Playing_VS_Robot extends AppCompatActivity {
         }
     }
 
-    public int checkWinner(int[] board) {
-        // Check rows for a win
-        for (int i = 0; i < 9; i += 3) {
-            if (board[i] == board[i + 1] && board[i + 1] == board[i + 2] && board[i] != 0) {
-                return (board[i] == 2) ? 10 : -10;
-            }
-        }
+    //****************************************
 
-        // Check columns for a win
-        for (int i = 0; i < 3; i++) {
-            if (board[i] == board[i + 3] && board[i + 3] == board[i + 6] && board[i] != 0) {
-                return (board[i] == 2) ? 10 : -10;
-            }
-        }
-
-        // Check diagonals for a win
-        if (board[0] == board[4] && board[4] == board[8] && board[0] != 0) {
-            return (board[0] == 2) ? 10 : -10;
-        }
-
-        if (board[2] == board[4] && board[4] == board[6] && board[2] != 0) {
-            return (board[2] == 2) ? 10 : -10;
-        }
-
-
-        // Check for a draw
-        boolean isDraw = true;
-        for (int i = 0; i < 9; i++) {
-            if (board[i] == 0) {
-                isDraw = false;
-                break;
-            }
-        }
-
-        if (isDraw) {
-            return 0; // Draw
-        }
-
-        // Game is still ongoing
-        return Integer.MIN_VALUE;
-    }
-
-
-    private boolean isBoardFull(int[] board) {
-        for (int i : board) {
-            if (i == 0) {
-                return false;
-            }
-        }
-        return true;
-    }
+    /*
+        Hard level
+    */
 
     private int minimax(int[] board, int depth, boolean isMaximizing) {
         int score = checkWinner(board);
@@ -340,10 +302,133 @@ public class Playing_VS_Robot extends AppCompatActivity {
         return bestMove;
     }
 
+    private boolean isBoardFull(int[] board) {
+        for (int i : board) {
+            if (i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public int checkWinner(int[] board) {
+        // Check rows for a win
+        for (int i = 0; i < 9; i += 3) {
+            if (board[i] == board[i + 1] && board[i + 1] == board[i + 2] && board[i] != 0) {
+                return (board[i] == 2) ? 10 : -10;
+            }
+        }
+
+        // Check columns for a win
+        for (int i = 0; i < 3; i++) {
+            if (board[i] == board[i + 3] && board[i + 3] == board[i + 6] && board[i] != 0) {
+                return (board[i] == 2) ? 10 : -10;
+            }
+        }
+
+        // Check diagonals for a win
+        if (board[0] == board[4] && board[4] == board[8] && board[0] != 0) {
+            return (board[0] == 2) ? 10 : -10;
+        }
+
+        if (board[2] == board[4] && board[4] == board[6] && board[2] != 0) {
+            return (board[2] == 2) ? 10 : -10;
+        }
+
+
+        // Check for a draw
+        boolean isDraw = true;
+        for (int i = 0; i < 9; i++) {
+            if (board[i] == 0) {
+                isDraw = false;
+                break;
+            }
+        }
+
+        if (isDraw) {
+            return 0; // Draw
+        }
+
+        // Game is still ongoing
+        return Integer.MIN_VALUE;
+    }
+
+    /*
+        Medium level
+    */
+
+    private int makeMediumMove(int[] board) {
+        // Check if the computer can win in the next move
+        for (int i = 0; i < 9; i++) {
+            if (board[i] == 0) { // Check if the cell is empty
+                board[i] = 2; // Assume '2' is the computer's symbol
+                if (checkWin(board, 2)) {
+                    return i; // Return the winning move index
+                }
+                board[i] = 0; // Undo move
+            }
+        }
+
+        // Check if the player can win in the next move and block them
+        for (int i = 0; i < 9; i++) {
+            if (board[i] == 0) { // Check if the cell is empty
+                board[i] = 1; // Assume '1' is the player's symbol
+                if (checkWin(board, 1)) {
+                    board[i] = 2; // Block the player
+                    return i; // Return the blocking move index
+                }
+                board[i] = 0; // Undo move
+            }
+        }
+
+        // If no winning or blocking move is possible, make a random move
+        makeRandomMove();
+        return 100;
+    }
+
+
+    private boolean checkWin(int[] board, int symbol) {
+        // Check rows
+        for (int i = 0; i < 9; i += 3) {
+            if (board[i] == symbol && board[i + 1] == symbol && board[i + 2] == symbol) return true;
+        }
+        // Check columns
+        for (int i = 0; i < 3; i++) {
+            if (board[i] == symbol && board[i + 3] == symbol && board[i + 6] == symbol) return true;
+        }
+        // Check diagonals
+        if (board[0] == symbol && board[4] == symbol && board[8] == symbol) return true;
+        return board[2] == symbol && board[4] == symbol && board[6] == symbol;// No win found
+    }
+
+    /*
+        Easy level
+    */
+
+
+    private void makeRandomMove() {
+        Random random = new Random();
+        int randomPosition;
+
+        do {
+            randomPosition = random.nextInt(9); // Generate a random position from 0 to 8
+        } while (!isBoxSelectable(randomPosition)); // Ensure the random position is selectable
+
+        makeMove(randomPosition);
+    }
+
+    //****************************************
+
+
     private void computerPlay() {
         // Check if the board is empty
-        if (isBoardEmpty()) {
+        if (level == 1 || isBoardEmpty()) {
             makeRandomMove(); // Make a random move if the board is empty
+        } else if (level == 2) {
+            int move = makeMediumMove(boxPositions);
+            if (move != 100) {
+                makeMove(move);
+            }
         } else {
             int bestMove = findBestMove();
             makeMove(bestMove); // Perform the move
@@ -359,16 +444,6 @@ public class Playing_VS_Robot extends AppCompatActivity {
         return true; // All positions are empty
     }
 
-    private void makeRandomMove() {
-        Random random = new Random();
-        int randomPosition;
-
-        do {
-            randomPosition = random.nextInt(9); // Generate a random position from 0 to 8
-        } while (!isBoxSelectable(randomPosition)); // Ensure the random position is selectable
-
-        makeMove(randomPosition);
-    }
 
     private void makeMove(int position) {
         ImageView selectedImageView;

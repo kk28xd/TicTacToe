@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
             if (sharedPreferencesClick.getBoolean("ClickOn", true)) {
                 playClickSound();
             }
-            Intent intent = new Intent(MainActivity.this, Playing_VS_Robot.class);
+            Intent intent = new Intent(MainActivity.this, DifficultyLevelActivity.class);
             startActivity(intent);
         });
     }

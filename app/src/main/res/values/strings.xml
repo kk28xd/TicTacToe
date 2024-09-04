@@ -21,12 +21,8 @@
     <string name="play_with_a_friend">Play with a friend</string>
     <string name="robot">Robot</string>
     <string name="player">Player</string>
-
-    <string-array name="language_options">
-        <item>English</item>
-        <item>Arabic</item>
-        <item>German</item>
-        <!-- Add more languages here -->
-    </string-array>
-
+    <string name="easy">Easy</string>
+    <string name="medium">Medium</string>
+    <string name="hard">Hard</string>
+    <string name="play_with_robot">Play with robot</string>
 </resources>

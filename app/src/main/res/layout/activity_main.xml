@@ -15,7 +15,7 @@
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/settings4"
+        app:srcCompat="@drawable/settings"
         android:contentDescription="TODO" />
 
     <ImageView
@@ -58,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:text="@string/play_vs_robot"
+        android:text="@string/play_with_robot"
         android:textColor="@color/white"
         android:textSize="24sp"
         android:textStyle="bold"

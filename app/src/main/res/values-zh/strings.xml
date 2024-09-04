@@ -22,4 +22,8 @@
     <string name="play_with_a_friend">与朋友一起玩</string>
     <string name="robot">机器人</string>
     <string name="player">玩家</string>
+    <string name="easy">简单</string>
+    <string name="medium">中等</string>
+    <string name="hard">困难</string>
+    <string name="play_with_robot">与机器人玩</string>
 </resources>

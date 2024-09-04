@@ -22,4 +22,8 @@
     <string name="play_with_a_friend">Jugar con un amigo</string>
     <string name="robot">robot</string>
     <string name="player">jugador</string>
+    <string name="easy">Fácil</string>
+    <string name="medium">Medio</string>
+    <string name="hard">Difícil</string>
+    <string name="play_with_robot">Jugar con robot</string>
 </resources>
