@@ -5,9 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioAttributes;
+
 import java.util.Random;
+
 import android.media.SoundPool;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -170,7 +174,9 @@ public class Playing_VS_Robot extends AppCompatActivity {
         } else {
             changePlayerTurn(playerTurn == 1 ? 2 : 1);
             if (playerTurn == 2) {
-                computerPlay();  // Call computer's turn
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                    new Handler().postDelayed(this::computerPlay, this, 400);
+                }
             }
         }
     }
